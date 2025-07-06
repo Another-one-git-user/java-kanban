@@ -1,3 +1,5 @@
+import java.util.Objects;
+
 public class Task {
     private TaskStatus taskStatus;
     private String taskTitle;
@@ -11,5 +13,18 @@ public class Task {
 
     public int getId() {
         return id;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Task task)) return false;
+        return this.id == task.id;
+        //return id == task.id && taskStatus == task.taskStatus && Objects.equals(taskTitle, task.taskTitle);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 }

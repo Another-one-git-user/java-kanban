@@ -3,29 +3,37 @@ import java.util.HashMap;
 
 public class TaskManager {
     private static int taskId;
-    //private HashMap<TaskStatus, ArrayList<Task>> allTasksByStatus;
-    //private HashMap<TaskTypes, ArrayList<Task>> allTasksByTypes;
     private HashMap<Integer, Task> hashMapTasks;
     private HashMap<Integer, Epic> hashMapEpics;
     private HashMap<Integer, Subtask> hashMapSubtasks;
 
-    private static int getTaskId() {
-        return taskId;
+    public TaskManager() {
+        this.hashMapTasks = new HashMap<>();
+        this.hashMapEpics = new HashMap<>();
+        this.hashMapSubtasks = new HashMap<>();
+        taskId = 0;
     }
 
+    //методы для id задач
+    private int getLastGeneratedId() {
+        return taskId;
+    }
+    public int generateNewTaskId() {
+        return getLastGeneratedId() + 1;
+    }
 
+    //гетеры таблиц
     public HashMap<Integer, Task> getHashMapTasks() {
         return hashMapTasks;
     }
-
     public HashMap<Integer, Epic> getHashMapEpics() {
         return hashMapEpics;
     }
-
     public HashMap<Integer, Subtask> getHashMapSubtasks() {
         return hashMapSubtasks;
     }
 
+    //Удаление всего списка задач
     public void deleteAllTasks() {
         this.getHashMapTasks().clear();
     }
@@ -36,20 +44,18 @@ public class TaskManager {
         this.getHashMapSubtasks().clear();
     }
 
+    //Получение задачи по id
     public Task getTaskById(Integer id){
         return this.getHashMapTasks().get(id);
     }
-    public Task getEpicById(Integer id){
+    public Epic getEpicById(Integer id){
         return this.getHashMapEpics().get(id);
     }
-    public Task getSubtaskById(Integer id){
+    public Subtask getSubtaskById(Integer id){
         return this.getHashMapSubtasks().get(id);
     }
 
-    private static int generateNewTaskId() {
-        return getTaskId() + 1;
-    }
-
+    // Добавление новой задачи в список
     public void addNewTask(Task task){
         this.getHashMapTasks().put(generateNewTaskId(), task);
     }
@@ -60,13 +66,34 @@ public class TaskManager {
         this.getHashMapSubtasks().put(generateNewTaskId(), subtask);
     }
 
-    public void updateTask(Task newTask) {
-        this.getHashMapTasks().put(newTask.getId(), newTask);
+    //Получить список всех подзадач Эпика
+    public ArrayList<Subtask> getSubtasks(Epic epic) {
+        return epic.getSubtasks();
     }
-    public void updateTask(Epic newEpic) {
-        this.getHashMapEpics().put(newEpic.getId(), newEpic);
+
+    /*
+    Обновление задачи
+    (Если я правильно понял, то для обновления будет создаа новая задача с id уже существующей,
+    которую хотим обновить. Другими словами id таким задачам задаём вручную, а не через taskManager)
+    */
+    public void updateTask(Task updateTask) {
+        this.getHashMapTasks().put(updateTask.getId(), updateTask);
     }
-    public void updateTask(Subtask newSubtask) {
-        this.getHashMapTasks().put(newSubtask.getId(), newSubtask);
+    public void updateEpic(Epic updateEpic) {
+        this.getHashMapEpics().put(updateEpic.getId(), updateEpic);
+    }
+    public void updateSubtask(Subtask updateSubtask) {
+        this.getHashMapTasks().put(updateSubtask.getId(), updateSubtask);
+    }
+
+    // Удаление задачи из списка
+    public void deleteTask(int id) {
+        this.getHashMapTasks().remove(id);
+    }
+    public void deleteEpic(int id) {
+        this.getHashMapEpics().remove(id);
+    }
+    public void deleteSubtask(int id) {
+        this.getHashMapSubtasks().remove(id);
     }
 }
