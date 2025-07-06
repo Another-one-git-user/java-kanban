@@ -31,4 +31,12 @@ public class Task {
     public int hashCode() {
         return Objects.hash(id);
     }
+
+    public TaskStatus getTaskStatus() {
+        return taskStatus;
+    }
+
+    public String getTaskTitle() {
+        return taskTitle;
+    }
 }

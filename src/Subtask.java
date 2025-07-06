@@ -5,5 +5,6 @@ public class Subtask extends Task{
         super(taskStatus, taskTitle, taskId);
         this.epic = epic;
         epic.addSubtask(this); //Подзадача автоматически добавляется в список своего Эпика
+        epic.setEpicStatus(); //После добавления подзадачи, эпик переопределяет свой статус
     }
 }
