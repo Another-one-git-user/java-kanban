@@ -10,6 +10,10 @@ public class Task {
         this.taskTitle = taskTitle;
         this.id = taskId;
     }
+    public Task(String taskTitle, int taskId) {
+        this.taskTitle = taskTitle;
+        this.id = taskId;
+    }
 
     public int getId() {
         return id;
