@@ -96,6 +96,7 @@ public class TaskManager {
         int id = updateSubtask.getId();
         if (this.getHashMapSubtasks().containsKey(id)) {
             this.getHashMapSubtasks().put(updateSubtask.getId(), updateSubtask);
+            updateSubtask.getEpic().setEpicStatus();//Обновляем статус эпика после обновления его подзадачи
         }
     }
 
