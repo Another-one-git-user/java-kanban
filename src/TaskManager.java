@@ -56,14 +56,14 @@ public class TaskManager {
     }
 
     // Добавление новой задачи в список
-    public void addNewTask(Task task){
-        this.getHashMapTasks().put(generateNewTaskId(), task);
+    public void addNewTask(Task newTask){
+        this.getHashMapTasks().put(generateNewTaskId(), newTask);
     }
-    public void addNewEpic(Epic epic){
-        this.getHashMapEpics().put(generateNewTaskId(), epic);
+    public void addNewEpic(Epic newEpic){
+        this.getHashMapEpics().put(generateNewTaskId(), newEpic);
     }
-    public void addNewSubtask(Subtask subtask){
-        this.getHashMapSubtasks().put(generateNewTaskId(), subtask);
+    public void addNewSubtask(Subtask newSubtask){
+        this.getHashMapSubtasks().put(generateNewTaskId(), newSubtask);
     }
 
     //Получить список всех подзадач Эпика
@@ -77,13 +77,26 @@ public class TaskManager {
     которую хотим обновить. Другими словами id таким задачам задаём вручную, а не через taskManager)
     */
     public void updateTask(Task updateTask) {
-        this.getHashMapTasks().put(updateTask.getId(), updateTask);
+        int id = updateTask.getId();
+        if (this.getHashMapTasks().containsKey(id)) {
+            this.getHashMapTasks().put(updateTask.getId(), updateTask);
+        }
     }
     public void updateEpic(Epic updateEpic) {
-        this.getHashMapEpics().put(updateEpic.getId(), updateEpic);
+        int id = updateEpic.getId();
+        if (this.getHashMapEpics().containsKey(id)) {
+            //При обновлении эпика, обновлённый (новый объект по сути) не будет в себе иметь связь с подзадачами
+            updateEpic.setSubtasks(this.getEpicById(id).getSubtasks());
+            updateEpic.setEpicStatus();//Вычисляем статус для нового эпика
+            this.getHashMapEpics().put(updateEpic.getId(), updateEpic);
+        }
+
     }
     public void updateSubtask(Subtask updateSubtask) {
-        this.getHashMapTasks().put(updateSubtask.getId(), updateSubtask);
+        int id = updateSubtask.getId();
+        if (this.getHashMapSubtasks().containsKey(id)) {
+            this.getHashMapSubtasks().put(updateSubtask.getId(), updateSubtask);
+        }
     }
 
     // Удаление задачи из списка
