@@ -12,7 +12,6 @@ public class Epic extends Task{
     public Epic(String taskTitle, int taskId) {
         super(taskTitle, taskId);
         this.subtasks = new ArrayList<>();
-        this.taskStatus = TaskStatus.NEW; //Каждый новый эпик будет иметь статус NEW, ведь подзадачи можно создать только при существовании Эпика
     }
 
     public ArrayList<Subtask> getSubtasks() {

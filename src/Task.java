@@ -13,6 +13,7 @@ public class Task {
     public Task(String taskTitle, int taskId) {
         this.taskTitle = taskTitle;
         this.id = taskId;
+        this.taskStatus = TaskStatus.NEW;
     }
 
     public int getId() {
