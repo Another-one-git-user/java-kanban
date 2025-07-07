@@ -1,9 +1,9 @@
 import java.util.Objects;
 
 public class Task {
-    private TaskStatus taskStatus;
-    private String taskTitle;
-    private final int id;
+    TaskStatus taskStatus;
+    String taskTitle;
+    final int id;
 
     public Task(TaskStatus taskStatus, String taskTitle, int taskId) {
         this.taskStatus = taskStatus;
@@ -39,5 +39,14 @@ public class Task {
 
     public String getTaskTitle() {
         return taskTitle;
+    }
+
+    @Override
+    public String toString() {
+        return "Task{" +
+                "taskStatus=" + taskStatus +
+                ", taskTitle='" + taskTitle + '\'' +
+                ", id=" + id +
+                '}';
     }
 }
