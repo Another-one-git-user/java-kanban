@@ -19,7 +19,9 @@ public class TaskManager {
         return taskId;
     }
     public int generateNewTaskId() {
-        return getLastGeneratedId() + 1;
+        System.out.println(getLastGeneratedId());
+        taskId += 1;
+        return taskId;
     }
 
     //гетеры таблиц
