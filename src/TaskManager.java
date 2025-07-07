@@ -111,4 +111,13 @@ public class TaskManager {
     public void deleteSubtask(int id) {
         this.getHashMapSubtasks().remove(id);
     }
+
+    @Override
+    public String toString() {
+        return "TaskManager{" +
+                "hashMapTasks=" + hashMapTasks +
+                ", hashMapEpics=" + hashMapEpics +
+                ", hashMapSubtasks=" + hashMapSubtasks +
+                '}';
+    }
 }
