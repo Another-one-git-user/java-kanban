@@ -55,12 +55,18 @@ public class Epic extends Task{
 
     @Override
     public String toString() {
+        String subtasksString = "{";
+        for (Subtask subtask : subtasks) {
+            subtasksString += subtask.hashCode() + ", ";
+        }
+        subtasksString += "}";
+
         return "Epic{" +
                 "taskStatus=" + taskStatus +
                 ", taskTitle='" + taskTitle + '\'' +
                 ", id=" + id +
-                ", taskStatus=" + taskStatus +
-                ", subtasks=" + subtasks +
+                ", subtasks=" + subtasksString +
+                ", hashCode=" + hashCode() +
                 '}';
     }
 }
