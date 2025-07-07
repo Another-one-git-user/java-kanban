@@ -18,8 +18,18 @@ public class Epic extends Task{
         return subtasks;
     }
 
-    public void addSubtask(Subtask subtask) {
-        this.getSubtasks().add(subtask);
+    public void addSubtask(Subtask newSubtask) {
+        boolean isNew = true;
+        for (int i = 0; i < subtasks.size(); i++) {
+            if (newSubtask.equals(subtasks.get(i))) {
+                subtasks.set(i, newSubtask);
+                isNew = false;
+                break;
+            }
+        }
+        if (isNew) {
+            this.subtasks.add(newSubtask);
+        }
     }
 
     public void setEpicStatus() {
