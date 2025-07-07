@@ -30,8 +30,10 @@ public class Main {
         System.out.println(taskManager.getHashMapEpics());
         System.out.println(taskManager.getHashMapSubtasks());
 
-        taskManager.updateSubtask(new Subtask(TaskStatus.DONE, "Subtask 1 but DONE", 4, epic));
+//        taskManager.updateSubtask(new Subtask(TaskStatus.DONE, "Subtask 1 but DONE", 4, epic));
+//        System.out.println(taskManager.getHashMapEpics());
 
+        taskManager.deleteSubtask(5);
         System.out.println(taskManager.getHashMapEpics());
         System.out.println(taskManager.getHashMapSubtasks());
     }

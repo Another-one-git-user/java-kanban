@@ -106,10 +106,26 @@ public class TaskManager {
         this.getHashMapTasks().remove(id);
     }
     public void deleteEpic(int id) {
+        //Вместе с эпиком удаляются и его подзадачи
+        ArrayList<Subtask> epicSubtasks= this.getEpicById(id).getSubtasks();
+        HashMap<Integer, Subtask> allSubtasks = this.getHashMapSubtasks();
+        for (Subtask subtask : epicSubtasks) {
+            allSubtasks.remove(subtask.getId());
+        }
         this.getHashMapEpics().remove(id);
     }
     public void deleteSubtask(int id) {
-        this.getHashMapSubtasks().remove(id);
+        Epic epic = this.getSubtaskById(id).getEpic();
+        ArrayList<Subtask> epicSubtasks= epic.getSubtasks();
+        HashMap<Integer, Subtask> allSubtasks = this.getHashMapSubtasks();
+        for (int i = 0; i < epicSubtasks.size(); i++) {
+            if (epicSubtasks.get(i).equals(allSubtasks.get(id))) {
+                epicSubtasks.remove(i);
+                epic.setEpicStatus();
+                break;
+            }
+        }
+        allSubtasks.remove(id);
     }
 
     @Override
