@@ -19,7 +19,6 @@ public class TaskManager {
         return taskId;
     }
     public int generateNewTaskId() {
-        System.out.println(getLastGeneratedId());
         taskId += 1;
         return taskId;
     }
