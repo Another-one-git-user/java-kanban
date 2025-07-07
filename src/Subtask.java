@@ -25,7 +25,8 @@ public class Subtask extends Task{
                 "taskStatus=" + taskStatus +
                 ", taskTitle='" + taskTitle + '\'' +
                 ", id=" + id +
-                ", epic=" + epic.hashCode() +
+                ", epic=" + epic.getId() +
+                ", hashCode=" + hashCode() +
                 '}';
     }
 }

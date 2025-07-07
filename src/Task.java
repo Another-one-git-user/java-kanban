@@ -47,6 +47,7 @@ public class Task {
                 "taskStatus=" + taskStatus +
                 ", taskTitle='" + taskTitle + '\'' +
                 ", id=" + id +
+                ", hashCode=" + hashCode() +
                 '}';
     }
 }
