@@ -57,13 +57,13 @@ public class TaskManager {
 
     // Добавление новой задачи в список
     public void addNewTask(Task newTask){
-        this.getHashMapTasks().put(generateNewTaskId(), newTask);
+        this.getHashMapTasks().put(newTask.getId(), newTask);
     }
     public void addNewEpic(Epic newEpic){
-        this.getHashMapEpics().put(generateNewTaskId(), newEpic);
+        this.getHashMapEpics().put(newEpic.getId(), newEpic);
     }
     public void addNewSubtask(Subtask newSubtask){
-        this.getHashMapSubtasks().put(generateNewTaskId(), newSubtask);
+        this.getHashMapSubtasks().put(newSubtask.getId(), newSubtask);
     }
 
     //Получить список всех подзадач Эпика
