@@ -62,6 +62,7 @@ public class TaskManager {
         this.hashMapSubtasks.clear();
         for (Epic epic: this.hashMapEpics.values()) {
             epic.clearSubtasks();
+            this.setEpicStatus(epic);
         }
     }
 
@@ -130,7 +131,7 @@ public class TaskManager {
             boolean isAllNew = true;
             boolean isAllDone = true;
             for (Subtask subtask : hashMapSubtasks.values()) {
-                if (subtask.getId() == epic.getId()) {
+                if (subtask.getEpicId() == epic.getId()) {
                     if (subtask.getTaskStatus() != TaskStatus.NEW) {
                         isAllNew = false;
                     }

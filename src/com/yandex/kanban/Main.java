@@ -17,29 +17,33 @@ public class Main {
         taskManager.addNewTask(task2);
 
         Epic epic = new Epic("Epic1", "Epic 1 Description");
-        Subtask subtask1 = new Subtask("com.yandex.kanban.module.Subtask 1", "none");
-        Subtask subtask2 = new Subtask(TaskStatus.DONE, "com.yandex.kanban.module.Subtask 2", "none again");
+        Subtask subtask1 = new Subtask("Subtask 1", "none");
+        Subtask subtask2 = new Subtask(TaskStatus.DONE, "Subtask 2", "none again");
 
         taskManager.addNewEpic(epic);
         taskManager.addNewSubtask(subtask1, epic);
         taskManager.addNewSubtask(subtask2, epic);
-
-        Epic epic2 = new Epic("Epic 2", "Epic 2 Description");
-        Subtask subtask3 = new Subtask("Subtask 3 in epic2", "noen");
-
-        taskManager.addNewEpic(epic2);
-        taskManager.addNewSubtask(subtask3, epic);
-
-        System.out.println(taskManager.getAllTasks());
-        System.out.println(taskManager.getAllEpics());
-        System.out.println(taskManager.getAllSubtasks());
-
-        Subtask subtask4 = new Subtask("Subtask 4 in epic2", "noen");
-        taskManager.updateSubtask(subtask4, 4);
         System.out.println(taskManager.getAllEpics());
 
-        taskManager.deleteSubtask(5);
-        System.out.println(taskManager.getAllEpics());
-        System.out.println(taskManager.getAllSubtasks());
+//        Epic epic2 = new Epic("Epic 2", "Epic 2 Description");
+//        Subtask subtask3 = new Subtask("Subtask 3 in epic2", "noen");
+//
+//        taskManager.addNewEpic(epic2);
+//        taskManager.addNewSubtask(subtask3, epic2);
+//
+////        System.out.println(taskManager.getAllTasks());
+////        System.out.println(taskManager.getAllEpics());
+////        System.out.println(taskManager.getAllSubtasks());
+//
+//        Subtask subtask4 = new Subtask(TaskStatus.DONE, "Subtask 4 in epic2", "noen");
+//        taskManager.updateSubtask(subtask4, 4);
+////        System.out.println(taskManager.getAllEpics());
+////        System.out.println(taskManager.getAllSubtasks());
+//
+////        taskManager.deleteSubtask(5);
+////        System.out.println(taskManager.getAllEpics());
+////        System.out.println(taskManager.getAllSubtasks());
+//        taskManager.deleteAllSubtasks();
+////        System.out.println(taskManager.getAllEpics());
     }
 }

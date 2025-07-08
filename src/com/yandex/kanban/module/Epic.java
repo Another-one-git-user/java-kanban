@@ -12,6 +12,7 @@ public class Epic extends Task{
     // Конструктор копирования
     public Epic(Epic epic) {
         super(epic.taskTitle, epic.description);
+        this.taskStatus = epic.taskStatus;
         this.id = epic.id;
         this.subtasks_ids = new ArrayList<>(epic.subtasks_ids);
     }
