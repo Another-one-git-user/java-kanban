@@ -21,23 +21,32 @@ public class TaskManager {
     }
 
     //методы для id задач
-    private int getLastGeneratedId() {
-        return taskId;
-    }
     public int generateNewTaskId() {
         taskId += 1;
         return taskId;
     }
 
     //гетеры таблиц
-    public HashMap<Integer, Task> getHashMapTasks() {
-        return hashMapTasks;
+    public ArrayList<Task> getTasks() {
+        ArrayList<Task> copies = new ArrayList<>();
+        for (Task task : hashMapTasks.values()) {
+            copies.add(new Task(task));
+        }
+        return copies;
     }
-    public HashMap<Integer, Epic> getHashMapEpics() {
-        return hashMapEpics;
+    public ArrayList<Epic> getEpics() {
+        ArrayList<Epic> copies = new ArrayList<>();
+        for (Epic epic: hashMapEpics.values()) {
+            copies.add(new Epic(epic));
+        }
+        return copies;
     }
-    public HashMap<Integer, Subtask> getHashMapSubtasks() {
-        return hashMapSubtasks;
+    public ArrayList<Subtask> getSubtasks() {
+        ArrayList<Subtask> copies = new ArrayList<>();
+        for (Subtask subtask : hashMapSubtasks.values()) {
+            copies.add(new Subtask(subtask));
+        }
+        return copies;
     }
 
     //Удаление всего списка задач

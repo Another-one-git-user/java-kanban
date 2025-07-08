@@ -1,6 +1,7 @@
 package com.yandex.kanban.module;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Epic extends Task{
 
@@ -10,6 +11,12 @@ public class Epic extends Task{
     public Epic(String taskTitle, String description) {
         super(taskTitle, description);
         this.subtasks = new ArrayList<>();
+    }
+
+    // Конструктор копирования
+    public Epic(Epic epic) {
+        super(epic.taskTitle, epic.description);
+        this.subtasks = (ArrayList<Subtask>) List.copyOf(epic.subtasks);
     }
 
     public ArrayList<Subtask> getSubtasks() {

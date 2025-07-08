@@ -17,6 +17,12 @@ public class Subtask extends Task{
 //        epic.setEpicStatus(); //После добавления подзадачи, эпик переопределяет свой статус
     }
 
+    // Конструктор копирования
+    public Subtask(Subtask subtask) {
+        super(subtask.taskStatus, subtask.taskTitle, subtask.description);
+        this.epic_id = subtask.epic_id;
+    }
+
 //    public Epic getEpic() {
 //        return epic;
 //    }

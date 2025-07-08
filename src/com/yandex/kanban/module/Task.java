@@ -19,6 +19,14 @@ public class Task {
         this.taskStatus = TaskStatus.NEW;
     }
 
+    // Конструктор копирования
+    public Task(Task other) {
+        this.id = other.id;
+        this.taskTitle = other.taskTitle;
+        this.description = other.description;
+        this.taskStatus = other.taskStatus;
+    }
+
     public int getId() {
         return id;
     }
