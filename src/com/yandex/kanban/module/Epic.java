@@ -20,7 +20,11 @@ public class Epic extends Task{
         return copies;
     }
 
-    public void setSubtasks(int subId) {
+    public void removeSubtask(int subId) {
+        this.subtasks_ids.remove(subId);
+    }
+
+    public void addSubtask(int subId) {
         this.subtasks_ids.add(subId);
     }
 
