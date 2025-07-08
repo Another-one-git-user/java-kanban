@@ -1,3 +1,5 @@
+package com.yandex.kanban.module;
+
 import java.util.Objects;
 
 public class Task {
@@ -43,7 +45,7 @@ public class Task {
 
     @Override
     public String toString() {
-        return "Task{" +
+        return "com.yandex.kanban.module.Task{" +
                 "taskStatus=" + taskStatus +
                 ", taskTitle='" + taskTitle + '\'' +
                 ", id=" + id +

@@ -1,3 +1,5 @@
+package com.yandex.kanban.module;
+
 public class Subtask extends Task{
     private Epic epic;
 
@@ -21,7 +23,7 @@ public class Subtask extends Task{
 
     @Override
     public String toString() {
-        return "Subtask{" +
+        return "com.yandex.kanban.module.Subtask{" +
                 "taskStatus=" + taskStatus +
                 ", taskTitle='" + taskTitle + '\'' +
                 ", id=" + id +

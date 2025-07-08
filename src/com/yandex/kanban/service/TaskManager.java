@@ -1,3 +1,9 @@
+package com.yandex.kanban.service;
+
+import com.yandex.kanban.module.Epic;
+import com.yandex.kanban.module.Subtask;
+import com.yandex.kanban.module.Task;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -130,7 +136,7 @@ public class TaskManager {
 
     @Override
     public String toString() {
-        return "TaskManager{" +
+        return "com.yandex.kanban.service.TaskManager{" +
                 "hashMapTasks=" + hashMapTasks +
                 ", hashMapEpics=" + hashMapEpics +
                 ", hashMapSubtasks=" + hashMapSubtasks +

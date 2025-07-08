@@ -1,13 +1,11 @@
+package com.yandex.kanban.module;
+
 import java.util.ArrayList;
 
 public class Epic extends Task{
-    private TaskStatus taskStatus;
+
     private ArrayList<Subtask> subtasks;
 
-//    public Epic(TaskStatus taskStatus, String taskTitle, int taskId) {
-//        super(taskStatus, taskTitle, taskId);
-//        this.subtasks = new ArrayList<>();
-//    }
 
     public Epic(String taskTitle, int taskId) {
         super(taskTitle, taskId);
@@ -71,7 +69,7 @@ public class Epic extends Task{
         }
         subtasksString += "}";
 
-        return "Epic{" +
+        return "com.yandex.kanban.module.Epic{" +
                 "taskStatus=" + taskStatus +
                 ", taskTitle='" + taskTitle + '\'' +
                 ", id=" + id +
