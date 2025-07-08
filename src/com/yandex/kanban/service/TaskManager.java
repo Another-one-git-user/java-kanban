@@ -60,6 +60,9 @@ public class TaskManager {
     }
     public void deleteAllSubtasks() {
         this.hashMapSubtasks.clear();
+        for (Epic epic: this.hashMapEpics.values()) {
+            epic.clearSubtasks();
+        }
     }
 
     //Получение задачи по id
