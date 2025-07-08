@@ -51,13 +51,14 @@ public class TaskManager {
 
     //Удаление всего списка задач
     public void deleteAllTasks() {
-        this.getHashMapTasks().clear();
+        this.hashMapTasks.clear();
     }
-    public void deleteAllEpics() {
-        this.getHashMapEpics().clear();
+    public void deleteAllEpics() { //нет эпиков, значит, нет подзадач
+        this.hashMapEpics.clear();
+        this.hashMapSubtasks.clear();
     }
     public void deleteAllSubtasks() {
-        this.getHashMapSubtasks().clear();
+        this.hashMapSubtasks.clear();
     }
 
     //Получение задачи по id
@@ -73,13 +74,19 @@ public class TaskManager {
 
     // Добавление новой задачи в список
     public void addNewTask(Task newTask){
-        this.getHashMapTasks().put(newTask.getId(), newTask);
+        int id = this.generateNewTaskId();
+        newTask.setId(id);
+        this.hashMapTasks.put(id, newTask);
     }
     public void addNewEpic(Epic newEpic){
-        this.getHashMapEpics().put(newEpic.getId(), newEpic);
+        int id = this.generateNewTaskId();
+        newEpic.setId(id);
+        this.hashMapEpics.put(id, newEpic);
     }
     public void addNewSubtask(Subtask newSubtask){
-        this.getHashMapSubtasks().put(newSubtask.getId(), newSubtask);
+        int id = this.generateNewTaskId();
+        newSubtask.setId(id);
+        this.hashMapSubtasks.put(id, newSubtask);
     }
 
     //Получить список всех подзадач Эпика
