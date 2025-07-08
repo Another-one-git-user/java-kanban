@@ -73,7 +73,7 @@ public class TaskManager {
         return this.getHashMapSubtasks().get(id);
     }
 
-    // Добавление новой задачи в список
+    // Добавление новой задачи в менеджер
     public void addNewTask(Task newTask){
         int id = this.generateNewTaskId();
         newTask.setId(id);
@@ -84,10 +84,21 @@ public class TaskManager {
         newEpic.setId(id);
         this.hashMapEpics.put(id, newEpic);
     }
-    public void addNewSubtask(Subtask newSubtask){
+    public void addNewSubtask(Subtask newSubtask, int epicId){
         int id = this.generateNewTaskId();
         newSubtask.setId(id);
+        newSubtask.setEpicId(id);
+        this.addSubtaskToEpic(id, epicId);
         this.hashMapSubtasks.put(id, newSubtask);
+        this.setEpicStatus(hashMapEpics.get(epicId));
+    }
+
+    //Добавляем подзадачу в Эпик
+    public void addSubtaskToEpic(int id, int epicId) {
+        Epic epic = hashMapEpics.get(epicId);
+        if (!epic.getSubtasks().contains(id)) {
+            epic.setSubtasks(id);
+        }
     }
 
     //Получить список всех подзадач Эпика
@@ -144,18 +155,16 @@ public class TaskManager {
     public void updateEpic(Epic updateEpic) {
         int id = updateEpic.getId();
         if (this.hashMapEpics.containsKey(id)) {
-            //При обновлении эпика, обновлённый (новый объект по сути) не будет в себе иметь связь с подзадачами
-            updateEpic.setSubtasks(this.getEpicById(id).getSubtasks());
-            updateEpic.setEpicStatus();//Вычисляем статус для нового эпика
-            this.hashMapEpics.put(updateEpic.getId(), updateEpic);
+            Epic oldEpic = this.hashMapEpics.get(id);
+            oldEpic.setTaskTitle(updateEpic.getTaskTitle());
+            oldEpic.setDescription(updateEpic.getDescription());
         }
-
     }
     public void updateSubtask(Subtask updateSubtask) {
         int id = updateSubtask.getId();
-        if (this.getHashMapSubtasks().containsKey(id)) {
-            this.getHashMapSubtasks().put(updateSubtask.getId(), updateSubtask);
-            updateSubtask.getEpic().addSubtask(updateSubtask);//Обновляем статус эпика и список его подзадач
+        if (this.hashMapSubtasks.containsKey(id)) {
+            this.hashMapSubtasks.put(updateSubtask.getId(), updateSubtask);
+            this.setEpicStatus(hashMapEpics.get(updateSubtask.getEpicId()));//Обновляем статус эпика и список его подзадач
         }
     }
 
