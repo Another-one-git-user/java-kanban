@@ -65,4 +65,16 @@ public class Task {
     public void setId(int id) {
         this.id = id;
     }
+
+    public void setTaskStatus(TaskStatus taskStatus) {
+        this.taskStatus = taskStatus;
+    }
+
+    public void setTaskTitle(String taskTitle) {
+        this.taskTitle = taskTitle;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
 }

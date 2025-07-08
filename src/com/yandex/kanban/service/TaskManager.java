@@ -3,6 +3,7 @@ package com.yandex.kanban.service;
 import com.yandex.kanban.module.Epic;
 import com.yandex.kanban.module.Subtask;
 import com.yandex.kanban.module.Task;
+import com.yandex.kanban.module.TaskStatus;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -22,26 +23,26 @@ public class TaskManager {
 
     //методы для id задач
     public int generateNewTaskId() {
-        taskId += 1;
+        taskId ++;
         return taskId;
     }
 
     //гетеры таблиц
-    public ArrayList<Task> getTasks() {
+    public ArrayList<Task> getAllTasks() {
         ArrayList<Task> copies = new ArrayList<>();
         for (Task task : hashMapTasks.values()) {
             copies.add(new Task(task));
         }
         return copies;
     }
-    public ArrayList<Epic> getEpics() {
+    public ArrayList<Epic> getAllEpics() {
         ArrayList<Epic> copies = new ArrayList<>();
         for (Epic epic: hashMapEpics.values()) {
             copies.add(new Epic(epic));
         }
         return copies;
     }
-    public ArrayList<Subtask> getSubtasks() {
+    public ArrayList<Subtask> getAllSubtasks() {
         ArrayList<Subtask> copies = new ArrayList<>();
         for (Subtask subtask : hashMapSubtasks.values()) {
             copies.add(new Subtask(subtask));
@@ -90,8 +91,43 @@ public class TaskManager {
     }
 
     //Получить список всех подзадач Эпика
-    public ArrayList<Subtask> getSubtasks(Epic epic) {
-        return epic.getSubtasks();
+    public ArrayList<Subtask> getEpicSubtasks(Epic epic) {
+        ArrayList<Integer> ids = epic.getSubtasks();
+        ArrayList<Subtask> copies = new ArrayList<>();
+        for (Integer id : ids) {
+            copies.add(new Subtask(hashMapSubtasks.get(id)));
+        }
+        return copies;
+    }
+
+    //Метод вычисления статуса эпика
+    public void setEpicStatus(Epic epic) {
+        if (epic.getSubtasks().isEmpty()) {
+            epic.setTaskStatus(TaskStatus.NEW);
+        } else {
+            boolean isAllNew = true;
+            boolean isAllDone = true;
+            for (Subtask subtask : hashMapSubtasks.values()) {
+                if (subtask.getId() == epic.getId()) {
+                    if (subtask.getTaskStatus() != TaskStatus.NEW) {
+                        isAllNew = false;
+                    }
+                    if (subtask.getTaskStatus() != TaskStatus.DONE) {
+                        isAllDone = false;
+                    }
+                    if (!isAllNew && !isAllDone) {
+                        break;
+                    }
+                }
+            }
+            if (isAllNew) {
+                epic.setTaskStatus(TaskStatus.NEW);
+            } else if (isAllDone) {
+                epic.setTaskStatus(TaskStatus.DONE);
+            } else {
+                epic.setTaskStatus(TaskStatus.IN_PROGRESS);
+            }
+        }
     }
 
     /*
@@ -101,17 +137,17 @@ public class TaskManager {
     */
     public void updateTask(Task updateTask) {
         int id = updateTask.getId();
-        if (this.getHashMapTasks().containsKey(id)) {
-            this.getHashMapTasks().put(updateTask.getId(), updateTask);
+        if (this.hashMapTasks.containsKey(id)) {
+            this.hashMapTasks.put(updateTask.getId(), updateTask);
         }
     }
     public void updateEpic(Epic updateEpic) {
         int id = updateEpic.getId();
-        if (this.getHashMapEpics().containsKey(id)) {
+        if (this.hashMapEpics.containsKey(id)) {
             //При обновлении эпика, обновлённый (новый объект по сути) не будет в себе иметь связь с подзадачами
             updateEpic.setSubtasks(this.getEpicById(id).getSubtasks());
             updateEpic.setEpicStatus();//Вычисляем статус для нового эпика
-            this.getHashMapEpics().put(updateEpic.getId(), updateEpic);
+            this.hashMapEpics.put(updateEpic.getId(), updateEpic);
         }
 
     }
