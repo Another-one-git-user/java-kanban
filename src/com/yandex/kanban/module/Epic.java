@@ -35,6 +35,7 @@ public class Epic extends Task{
         return "Epic{" +
                 "taskStatus=" + taskStatus +
                 ", taskTitle='" + taskTitle + '\'' +
+                ", description='" + description + '\'' +
                 ", id=" + id +
                 ", subtasks=" + subtasks_ids +
                 ", hashCode=" + hashCode() +

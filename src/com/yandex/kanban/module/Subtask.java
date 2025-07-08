@@ -27,6 +27,7 @@ public class Subtask extends Task{
         return "Subtask{" +
                 "taskStatus=" + taskStatus +
                 ", taskTitle='" + taskTitle + '\'' +
+                ", description='" + description + '\'' +
                 ", id=" + id +
                 ", epicId=" + epicId +
                 ", hashCode=" + hashCode() +

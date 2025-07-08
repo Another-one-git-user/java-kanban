@@ -151,28 +151,29 @@ public class TaskManager {
 
     /*
     Обновление задачи
-    (Если я правильно понял, то для обновления будет создаа новая задача с id уже существующей,
-    которую хотим обновить. Другими словами id таким задачам задаём вручную, а не через taskManager)
     */
-    public void updateTask(Task updateTask) {
-        int id = updateTask.getId();
+    public void updateTask(Task updateTask, int id) {
         if (this.hashMapTasks.containsKey(id)) {
-            this.hashMapTasks.put(updateTask.getId(), updateTask);
+            Task task = this.hashMapTasks.get(id);
+            task.setTaskTitle(updateTask.getTaskTitle());
+            task.setDescription(updateTask.getDescription());
+            task.setTaskStatus(updateTask.getTaskStatus());
         }
     }
-    public void updateEpic(Epic updateEpic) {
-        int id = updateEpic.getId();
+    public void updateEpic(Epic updateEpic, int id) {
         if (this.hashMapEpics.containsKey(id)) {
             Epic oldEpic = this.hashMapEpics.get(id);
             oldEpic.setTaskTitle(updateEpic.getTaskTitle());
             oldEpic.setDescription(updateEpic.getDescription());
         }
     }
-    public void updateSubtask(Subtask updateSubtask) {
-        int id = updateSubtask.getId();
+    public void updateSubtask(Subtask updateSubtask, int id) {
         if (this.hashMapSubtasks.containsKey(id)) {
-            this.hashMapSubtasks.put(updateSubtask.getId(), updateSubtask);
-            this.setEpicStatus(hashMapEpics.get(updateSubtask.getEpicId()));//Обновляем статус эпика и список его подзадач
+            Subtask subtask = this.hashMapSubtasks.get(id);
+            subtask.setTaskTitle(updateSubtask.getTaskTitle());
+            subtask.setDescription(updateSubtask.getDescription());
+            subtask.setTaskStatus(updateSubtask.getTaskStatus());
+            this.setEpicStatus(hashMapEpics.get(subtask.getEpicId()));
         }
     }
 
@@ -196,7 +197,7 @@ public class TaskManager {
 
     @Override
     public String toString() {
-        return "com.yandex.kanban.service.TaskManager{" +
+        return "TaskManager{" +
                 "hashMapTasks=" + hashMapTasks +
                 ", hashMapEpics=" + hashMapEpics +
                 ", hashMapSubtasks=" + hashMapSubtasks +

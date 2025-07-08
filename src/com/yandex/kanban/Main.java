@@ -25,7 +25,7 @@ public class Main {
         taskManager.addNewSubtask(subtask2, epic);
 
         Epic epic2 = new Epic("Epic 2", "Epic 2 Description");
-        Subtask subtask3 = new Subtask("com.yandex.kanban.module.Subtask 3 in epic2", "noen");
+        Subtask subtask3 = new Subtask("Subtask 3 in epic2", "noen");
 
         taskManager.addNewEpic(epic2);
         taskManager.addNewSubtask(subtask3, epic);
@@ -34,8 +34,9 @@ public class Main {
         System.out.println(taskManager.getAllEpics());
         System.out.println(taskManager.getAllSubtasks());
 
-//        taskManager.updateSubtask(new com.yandex.kanban.module.Subtask(com.yandex.kanban.module.TaskStatus.DONE, "com.yandex.kanban.module.Subtask 1 but DONE", 4, epic));
-//        System.out.println(taskManager.getAllEpics());
+        Subtask subtask4 = new Subtask("Subtask 4 in epic2", "noen");
+        taskManager.updateSubtask(subtask4, 4);
+        System.out.println(taskManager.getAllEpics());
 
         taskManager.deleteSubtask(5);
         System.out.println(taskManager.getAllEpics());
