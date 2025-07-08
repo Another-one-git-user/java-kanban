@@ -87,7 +87,7 @@ public class TaskManager {
     public void addNewSubtask(Subtask newSubtask, int epicId){
         int id = this.generateNewTaskId();
         newSubtask.setId(id);
-        newSubtask.setEpicId(id);
+        newSubtask.setEpicId(epicId);
         this.addSubtaskToEpic(id, epicId);
         this.hashMapSubtasks.put(id, newSubtask);
         this.setEpicStatus(hashMapEpics.get(epicId));
@@ -95,7 +95,7 @@ public class TaskManager {
     public void addNewSubtask(Subtask newSubtask, Epic epic){
         int id = this.generateNewTaskId();
         newSubtask.setId(id);
-        newSubtask.setEpicId(id);
+        newSubtask.setEpicId(epic.getId());
         this.addSubtaskToEpic(id, epic.getId());
         this.hashMapSubtasks.put(id, newSubtask);
         this.setEpicStatus(epic);
@@ -202,4 +202,5 @@ public class TaskManager {
                 ", hashMapSubtasks=" + hashMapSubtasks +
                 '}';
     }
+
 }

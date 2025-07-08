@@ -12,6 +12,7 @@ public class Epic extends Task{
     // Конструктор копирования
     public Epic(Epic epic) {
         super(epic.taskTitle, epic.description);
+        this.id = epic.id;
         this.subtasks_ids = new ArrayList<>(epic.subtasks_ids);
     }
 
@@ -21,7 +22,7 @@ public class Epic extends Task{
     }
 
     public void removeSubtask(int subId) {
-        this.subtasks_ids.remove(subId);
+        this.subtasks_ids.remove((Integer) subId);
     }
 
     public void addSubtask(int subId) {

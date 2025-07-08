@@ -15,6 +15,7 @@ public class Subtask extends Task{
     public Subtask(Subtask subtask) {
         super(subtask.taskStatus, subtask.taskTitle, subtask.description);
         this.epicId = subtask.epicId;
+        this.id = subtask.id;
     }
 
     public void setEpicId(int epicId) {
