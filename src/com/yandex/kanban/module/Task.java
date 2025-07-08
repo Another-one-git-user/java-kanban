@@ -5,16 +5,17 @@ import java.util.Objects;
 public class Task {
     TaskStatus taskStatus;
     String taskTitle;
-    final int id;
+    String description;
+    int id; //задаётся через сеттер. Значит, не может быть final
 
-    public Task(TaskStatus taskStatus, String taskTitle, int taskId) {
+    public Task(TaskStatus taskStatus, String taskTitle, String description) {
         this.taskStatus = taskStatus;
         this.taskTitle = taskTitle;
-        this.id = taskId;
+        this.description = description;
     }
-    public Task(String taskTitle, int taskId) {
+    public Task(String taskTitle, String description) {
         this.taskTitle = taskTitle;
-        this.id = taskId;
+        this.description = description;
         this.taskStatus = TaskStatus.NEW;
     }
 
@@ -27,7 +28,6 @@ public class Task {
         if (this == o) return true;
         if (!(o instanceof Task task)) return false;
         return this.id == task.id;
-        //return id == task.id && taskStatus == task.taskStatus && Objects.equals(taskTitle, task.taskTitle);
     }
 
     @Override
@@ -45,11 +45,16 @@ public class Task {
 
     @Override
     public String toString() {
-        return "com.yandex.kanban.module.Task{" +
+        return "Task{" +
                 "taskStatus=" + taskStatus +
                 ", taskTitle='" + taskTitle + '\'' +
+                ", description='" + description + '\'' +
                 ", id=" + id +
                 ", hashCode=" + hashCode() +
                 '}';
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }

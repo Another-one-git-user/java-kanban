@@ -1,33 +1,33 @@
 package com.yandex.kanban.module;
 
 public class Subtask extends Task{
-    private Epic epic;
+    private int epic_id;
 
-    public Subtask(TaskStatus taskStatus, String taskTitle, int taskId, Epic epic) {
-        super(taskStatus, taskTitle, taskId);
-        this.epic = epic;
-        epic.addSubtask(this); //Подзадача автоматически добавляется в список своего Эпика
-        epic.setEpicStatus(); //После добавления подзадачи, эпик переопределяет свой статус
+    public Subtask(TaskStatus taskStatus, String taskTitle, String description, int epic_id) {
+        super(taskStatus, taskTitle, description);
+        this.epic_id = epic_id;
+//        epic.addSubtask(this); //Подзадача автоматически добавляется в список своего Эпика
+//        epic.setEpicStatus(); //После добавления подзадачи, эпик переопределяет свой статус
     }
 
-    public Subtask(String taskTitle, int taskId, Epic epic) {
-        super(taskTitle, taskId);
-        this.epic = epic;
-        epic.addSubtask(this); //Подзадача автоматически добавляется в список своего Эпика
-        epic.setEpicStatus(); //После добавления подзадачи, эпик переопределяет свой статус
+    public Subtask(String taskTitle, String description, int epic_id) {
+        super(taskTitle, description);
+        this.epic_id = epic_id;
+//        epic.addSubtask(this); //Подзадача автоматически добавляется в список своего Эпика
+//        epic.setEpicStatus(); //После добавления подзадачи, эпик переопределяет свой статус
     }
 
-    public Epic getEpic() {
-        return epic;
-    }
+//    public Epic getEpic() {
+//        return epic;
+//    }
 
     @Override
     public String toString() {
-        return "com.yandex.kanban.module.Subtask{" +
+        return "Subtask{" +
                 "taskStatus=" + taskStatus +
                 ", taskTitle='" + taskTitle + '\'' +
                 ", id=" + id +
-                ", epic=" + epic.getId() +
+                ", epic_id=" + epic_id +
                 ", hashCode=" + hashCode() +
                 '}';
     }

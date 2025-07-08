@@ -7,8 +7,8 @@ public class Epic extends Task{
     private ArrayList<Subtask> subtasks;
 
 
-    public Epic(String taskTitle, int taskId) {
-        super(taskTitle, taskId);
+    public Epic(String taskTitle, String description) {
+        super(taskTitle, description);
         this.subtasks = new ArrayList<>();
     }
 
@@ -69,7 +69,7 @@ public class Epic extends Task{
         }
         subtasksString += "}";
 
-        return "com.yandex.kanban.module.Epic{" +
+        return "Epic{" +
                 "taskStatus=" + taskStatus +
                 ", taskTitle='" + taskTitle + '\'' +
                 ", id=" + id +
