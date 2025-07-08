@@ -92,6 +92,14 @@ public class TaskManager {
         this.hashMapSubtasks.put(id, newSubtask);
         this.setEpicStatus(hashMapEpics.get(epicId));
     }
+    public void addNewSubtask(Subtask newSubtask, Epic epic){
+        int id = this.generateNewTaskId();
+        newSubtask.setId(id);
+        newSubtask.setEpicId(id);
+        this.addSubtaskToEpic(id, epic.getId());
+        this.hashMapSubtasks.put(id, newSubtask);
+        this.setEpicStatus(epic);
+    }
 
     //Добавляем подзадачу в Эпик
     public void addSubtaskToEpic(int id, int epicId) {
