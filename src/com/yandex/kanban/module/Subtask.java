@@ -3,15 +3,18 @@ package com.yandex.kanban.module;
 public class Subtask extends Task{
     private int epicId;
 
-    public Subtask(TaskStatus taskStatus, String taskTitle, String description) {
+    public Subtask(TaskStatus taskStatus, String taskTitle, String description, int epicId) {
         super(taskStatus, taskTitle, description);
+        this.epicId = epicId;
     }
-    public Subtask(String taskTitle, String description) {
+    public Subtask(String taskTitle, String description, int epicId) {
         super(taskTitle, description);
+        this.epicId = epicId;
     }
     // Конструктор для обновлённой задачи
-    public Subtask(TaskStatus taskStatus, String taskTitle, String description, int id) {
+    public Subtask(TaskStatus taskStatus, String taskTitle, String description, int epicId, int id) {
         super(taskStatus, taskTitle, description, id);
+        this.epicId = epicId;
     }
     // Конструктор копирования
     public Subtask(Subtask subtask) {

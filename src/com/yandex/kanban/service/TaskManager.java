@@ -76,21 +76,14 @@ public class TaskManager {
         newEpic.setId(id);
         hashMapEpics.put(id, newEpic);
     }
-    public void addNewSubtask(Subtask newSubtask, int epicId){
+    public void addNewSubtask(Subtask newSubtask){
         int id = generateNewTaskId();
+        int epicId = newSubtask.getEpicId();
         newSubtask.setId(id);
         newSubtask.setEpicId(epicId);
         addSubtaskToEpic(id, epicId);
         hashMapSubtasks.put(id, newSubtask);
         setEpicStatus(hashMapEpics.get(epicId));
-    }
-    public void addNewSubtask(Subtask newSubtask, Epic epic){
-        int id = generateNewTaskId();
-        newSubtask.setId(id);
-        newSubtask.setEpicId(epic.getId());
-        addSubtaskToEpic(id, epic.getId());
-        hashMapSubtasks.put(id, newSubtask);
-        setEpicStatus(epic);
     }
 
     //Добавляем подзадачу в Эпик
