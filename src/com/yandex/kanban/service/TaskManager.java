@@ -168,15 +168,20 @@ public class TaskManager {
 
     // Удаление задачи из списка
     public void deleteTask(int id) {
-        hashMapTasks.remove(id);
+        if (getTaskById(id) != null) {
+            hashMapTasks.remove(id);
+        }
     }
     public void deleteEpic(int id) {
-        //Вместе с эпиком удаляются и его подзадачи
-        ArrayList<Integer> epicSubtasksIds = getEpicById(id).getSubtasks();
-        for (Integer subId : epicSubtasksIds) {
-            hashMapSubtasks.remove(subId);
+        Epic epic = getEpicById(id);
+        if (epic != null) {
+            //Вместе с эпиком удаляются и его подзадачи
+            ArrayList<Integer> epicSubtasksIds = epic.getSubtasks();
+            for (Integer subId : epicSubtasksIds) {
+                hashMapSubtasks.remove(subId);
+            }
+            hashMapEpics.remove(id);
         }
-        hashMapEpics.remove(id);
     }
     public void deleteSubtask(int id) {
         Epic epic = hashMapEpics.get(getSubtaskById(id).getEpicId());
