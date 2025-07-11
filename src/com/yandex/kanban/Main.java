@@ -35,8 +35,8 @@ public class Main {
         System.out.println(taskManager.getAllEpics());
         System.out.println(taskManager.getAllSubtasks());
 
-        Subtask subtask4 = new Subtask(TaskStatus.DONE, "Subtask 4 in epic2", "noen");
-        taskManager.updateSubtask(subtask4, 4);
+        Subtask subtask4 = new Subtask(TaskStatus.DONE, "Subtask 4 in epic2", "noen", 4);
+        taskManager.updateSubtask(subtask4);
 
         taskManager.deleteSubtask(5);
         System.out.println(taskManager.getAllEpics());

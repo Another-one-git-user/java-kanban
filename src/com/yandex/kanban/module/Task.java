@@ -3,9 +3,9 @@ package com.yandex.kanban.module;
 import java.util.Objects;
 
 public class Task {
-    TaskStatus taskStatus;
-    String taskTitle;
-    String description;
+    private TaskStatus taskStatus;
+    private String taskTitle;
+    private String description;
     int id; //задаётся через сеттер. Значит, не может быть final
 
     public Task(TaskStatus taskStatus, String taskTitle, String description) {
@@ -25,6 +25,21 @@ public class Task {
         this.taskTitle = other.taskTitle;
         this.description = other.description;
         this.taskStatus = other.taskStatus;
+    }
+
+    // Конструктор для обновлённой задачи
+    public Task(String taskTitle, String description, int id) {
+        this.taskTitle = taskTitle;
+        this.description = description;
+        this.id = id;
+        this.taskStatus = TaskStatus.NEW;
+    }
+    public Task(TaskStatus taskStatus, String taskTitle, String description, int id) {
+        this.taskStatus = taskStatus;
+        this.taskTitle = taskTitle;
+        this.description = description;
+        this.id = id;
+        this.taskStatus = TaskStatus.NEW;
     }
 
     public int getId() {
