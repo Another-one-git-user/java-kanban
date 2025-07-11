@@ -17,25 +17,23 @@ public class Main {
         taskManager.addNewTask(task2);
 
         Epic epic = new Epic("Epic1", "Epic 1 Description");
-        Subtask subtask1 = new Subtask("Subtask 1", "none", 3);
-        Subtask subtask2 = new Subtask(TaskStatus.DONE, "Subtask 2", "none again", 3);
-
         taskManager.addNewEpic(epic);
+        Subtask subtask1 = new Subtask("Subtask 1", "none", 3);
         taskManager.addNewSubtask(subtask1);
+        Subtask subtask2 = new Subtask(TaskStatus.DONE, "Subtask 2", "none again", 3);
         taskManager.addNewSubtask(subtask2);
 
 
         Epic epic2 = new Epic("Epic 2", "Epic 2 Description");
-        Subtask subtask3 = new Subtask("Subtask 3 in epic2", "noen", 4);
-
         taskManager.addNewEpic(epic2);
+        Subtask subtask3 = new Subtask("Subtask 3 in epic2", "noen", 6);
         taskManager.addNewSubtask(subtask3);
 
         System.out.println(taskManager.getAllTasks());
         System.out.println(taskManager.getAllEpics());
         System.out.println(taskManager.getAllSubtasks());
 
-        Subtask subtask4 = new Subtask(TaskStatus.DONE, "Subtask 4 in epic2", "noen", 4);
+        Subtask subtask4 = new Subtask(TaskStatus.DONE, "Subtask 4 in epic2", "noen", 4, 4);
         taskManager.updateSubtask(subtask4);
 
         taskManager.deleteSubtask(5);

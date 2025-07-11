@@ -80,7 +80,6 @@ public class TaskManager {
         int id = generateNewTaskId();
         int epicId = newSubtask.getEpicId();
         newSubtask.setId(id);
-        newSubtask.setEpicId(epicId);
         addSubtaskToEpic(id, epicId);
         hashMapSubtasks.put(id, newSubtask);
         setEpicStatus(hashMapEpics.get(epicId));
@@ -89,8 +88,10 @@ public class TaskManager {
     //Добавляем подзадачу в Эпик
     private void addSubtaskToEpic(int id, int epicId) {
         Epic epic = hashMapEpics.get(epicId);
-        if (!epic.getSubtasks().contains(id)) {
-            epic.addSubtask(id);
+        if (epic != null) { //Если эпика нет, то подзадача не добавляется никуда
+            if (!epic.getSubtasks().contains(id)) {
+                epic.addSubtask(id);
+            }
         }
     }
 
@@ -179,9 +180,11 @@ public class TaskManager {
     }
     public void deleteSubtask(int id) {
         Epic epic = hashMapEpics.get(getSubtaskById(id).getEpicId());
-        epic.removeSubtask(id);
-        hashMapSubtasks.remove(id);
-        setEpicStatus(epic);
+        if (epic != null) {
+            epic.removeSubtask(id);
+            hashMapSubtasks.remove(id);
+            setEpicStatus(epic);
+        }
     }
 
     @Override
