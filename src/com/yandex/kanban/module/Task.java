@@ -6,7 +6,7 @@ public class Task {
     private TaskStatus taskStatus;
     private String taskTitle;
     private String description;
-    int id; //задаётся через сеттер. Значит, не может быть final
+    private int id; //задаётся через сеттер. Значит, не может быть final
 
     public Task(TaskStatus taskStatus, String taskTitle, String description) {
         this.taskStatus = taskStatus;

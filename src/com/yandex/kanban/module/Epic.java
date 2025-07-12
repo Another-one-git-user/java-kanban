@@ -18,7 +18,7 @@ public class Epic extends Task{
     public Epic(Epic epic) {
         super(epic.getTaskTitle(), epic.getDescription());
         this.setTaskStatus(epic.getTaskStatus());
-        this.id = epic.id;
+        this.setId(epic.getId());
         this.subtasksIds = new ArrayList<>(epic.subtasksIds);
     }
 
@@ -46,7 +46,7 @@ public class Epic extends Task{
                 "taskStatus=" + getTaskStatus() +
                 ", taskTitle='" + getTaskTitle() + '\'' +
                 ", description='" + getDescription() + '\'' +
-                ", id=" + id +
+                ", id=" + getId() +
                 ", subtasks=" + subtasksIds +
                 ", hashCode=" + hashCode() +
                 '}';
