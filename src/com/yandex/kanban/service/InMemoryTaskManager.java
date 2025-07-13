@@ -14,7 +14,6 @@ public class InMemoryTaskManager implements TaskManager {
     private HashMap<Integer, Epic> hashMapEpics;
     private HashMap<Integer, Subtask> hashMapSubtasks;
 
-    //private InMemoryHistoryManager history = Managers.getDefaultHistory();
 
     public InMemoryTaskManager() {
         hashMapTasks = new HashMap<>();
@@ -44,10 +43,6 @@ public class InMemoryTaskManager implements TaskManager {
         return new ArrayList<>(hashMapSubtasks.values());
     }
 
-//    @Override
-//    public InMemoryHistoryManager getHistory() {
-//        return history;
-//    }
 
     //Удаление всего списка задач
     @Override
@@ -68,38 +63,20 @@ public class InMemoryTaskManager implements TaskManager {
         }
     }
 
-    //Добавление в список последних 10
-//    private void addToLastTenViewedTasks(Task task){
-//         if (lastTenViewedTasks.size() == 10) {
-//             lastTenViewedTasks.remove(0);
-//         }
-//        lastTenViewedTasks.add(task);
-//    }
+
 
     //Получение задачи по id
     @Override
     public Task getTask(Integer id){
-        Task task = hashMapTasks.get(id);
-//        if (hashMapTasks.containsKey(id)) {
-//            history.add(task);
-//        }
-        return task;
+        return hashMapTasks.get(id);
     }
     @Override
     public Epic getEpic(Integer id){
-        Epic epic = hashMapEpics.get(id);
-//        if (hashMapEpics.containsKey(id)) {
-//            history.add(epic);
-//        }
-        return epic;
+        return hashMapEpics.get(id);
     }
     @Override
     public Subtask getSubtask(Integer id){
-        Subtask subtask = hashMapSubtasks.get(id);
-//        if (hashMapSubtasks.containsKey(id)) {
-//            history.add(subtask);
-//        }
-        return subtask;
+        return hashMapSubtasks.get(id);
     }
 
     // Добавление новой задачи в менеджер
@@ -239,11 +216,6 @@ public class InMemoryTaskManager implements TaskManager {
             setEpicStatus(epic);
         }
     }
-
-//    @Override
-//    public ArrayList<Task> getHistory() {
-//        return new ArrayList<Task>(lastTenViewedTasks);
-//    }
 
     @Override
     public String toString() {
