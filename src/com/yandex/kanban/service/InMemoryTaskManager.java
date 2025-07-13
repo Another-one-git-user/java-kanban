@@ -63,19 +63,19 @@ public class InMemoryTaskManager implements TaskManager {
     }
 
     //Добавление в список последних 10
-    private void addToLastTenViewedTasks(Task task){
-         if (lastTenViewedTasks.size() == 10) {
-             lastTenViewedTasks.remove(0);
-         }
-        lastTenViewedTasks.add(task);
-    }
+//    private void addToLastTenViewedTasks(Task task){
+//         if (lastTenViewedTasks.size() == 10) {
+//             lastTenViewedTasks.remove(0);
+//         }
+//        lastTenViewedTasks.add(task);
+//    }
 
     //Получение задачи по id
     @Override
     public Task getTask(Integer id){
         Task task = hashMapTasks.get(id);
         if (hashMapTasks.containsKey(id)) {
-            addToLastTenViewedTasks(task);
+            //addToLastTenViewedTasks(task);
         }
         return task;
     }
@@ -83,7 +83,7 @@ public class InMemoryTaskManager implements TaskManager {
     public Epic getEpic(Integer id){
         Epic epic = hashMapEpics.get(id);
         if (hashMapEpics.containsKey(id)) {
-            addToLastTenViewedTasks(epic);
+            //addToLastTenViewedTasks(epic);
         }
         return epic;
     }
@@ -91,7 +91,7 @@ public class InMemoryTaskManager implements TaskManager {
     public Subtask getSubtask(Integer id){
         Subtask subtask = hashMapSubtasks.get(id);
         if (hashMapSubtasks.containsKey(id)) {
-            addToLastTenViewedTasks(subtask);
+            //addToLastTenViewedTasks(subtask);
         }
         return subtask;
     }
@@ -234,10 +234,10 @@ public class InMemoryTaskManager implements TaskManager {
         }
     }
 
-    @Override
-    public ArrayList<Task> getHistory() {
-        return new ArrayList<Task>(lastTenViewedTasks);
-    }
+//    @Override
+//    public ArrayList<Task> getHistory() {
+//        return new ArrayList<Task>(lastTenViewedTasks);
+//    }
 
     @Override
     public String toString() {
