@@ -25,11 +25,11 @@ public interface TaskManager {
     void deleteAllSubtasks();
 
     //Получение задачи по id
-    Task getTaskById(Integer id);
+    Task getTask(Integer id);
 
-    Epic getEpicById(Integer id);
+    Epic getEpic(Integer id);
 
-    Subtask getSubtaskById(Integer id);
+    Subtask getSubtask(Integer id);
 
     // Добавление новой задачи в менеджер
     void addNewTask(Task newTask);
@@ -59,6 +59,8 @@ public interface TaskManager {
     void deleteEpic(int id);
 
     void deleteSubtask(int id);
+
+    ArrayList<? extends Task> getHistory();
 
     @Override
     String toString();

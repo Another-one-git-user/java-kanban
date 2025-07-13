@@ -13,6 +13,7 @@ public class InMemoryTaskManager implements TaskManager {
     private HashMap<Integer, Task> hashMapTasks;
     private HashMap<Integer, Epic> hashMapEpics;
     private HashMap<Integer, Subtask> hashMapSubtasks;
+    private ArrayList<Task> lastTenViewedTasks = new ArrayList<>();
 
     public InMemoryTaskManager() {
         hashMapTasks = new HashMap<>();
@@ -61,18 +62,38 @@ public class InMemoryTaskManager implements TaskManager {
         }
     }
 
+    //Добавление в список последних 10
+    private void addToLastTenViewedTasks(Task task){
+         if (lastTenViewedTasks.size() == 10) {
+             lastTenViewedTasks.remove(0);
+         }
+        lastTenViewedTasks.add(task);
+    }
+
     //Получение задачи по id
     @Override
-    public Task getTaskById(Integer id){
-        return hashMapTasks.get(id);
+    public Task getTask(Integer id){
+        Task task = hashMapTasks.get(id);
+        if (hashMapTasks.containsKey(id)) {
+            addToLastTenViewedTasks(task);
+        }
+        return task;
     }
     @Override
-    public Epic getEpicById(Integer id){
-        return hashMapEpics.get(id);
+    public Epic getEpic(Integer id){
+        Epic epic = hashMapEpics.get(id);
+        if (hashMapEpics.containsKey(id)) {
+            addToLastTenViewedTasks(epic);
+        }
+        return epic;
     }
     @Override
-    public Subtask getSubtaskById(Integer id){
-        return hashMapSubtasks.get(id);
+    public Subtask getSubtask(Integer id){
+        Subtask subtask = hashMapSubtasks.get(id);
+        if (hashMapSubtasks.containsKey(id)) {
+            addToLastTenViewedTasks(subtask);
+        }
+        return subtask;
     }
 
     // Добавление новой задачи в менеджер
@@ -187,13 +208,13 @@ public class InMemoryTaskManager implements TaskManager {
     // Удаление задачи из списка
     @Override
     public void deleteTask(int id) {
-        if (getTaskById(id) != null) {
+        if (getTask(id) != null) {
             hashMapTasks.remove(id);
         }
     }
     @Override
     public void deleteEpic(int id) {
-        Epic epic = getEpicById(id);
+        Epic epic = getEpic(id);
         if (epic != null) {
             //Вместе с эпиком удаляются и его подзадачи
             ArrayList<Integer> epicSubtasksIds = epic.getSubtasks();
@@ -205,12 +226,17 @@ public class InMemoryTaskManager implements TaskManager {
     }
     @Override
     public void deleteSubtask(int id) {
-        Epic epic = hashMapEpics.get(getSubtaskById(id).getEpicId());
+        Epic epic = hashMapEpics.get(getSubtask(id).getEpicId());
         if (epic != null) {
             epic.removeSubtask(id);
             hashMapSubtasks.remove(id);
             setEpicStatus(epic);
         }
+    }
+
+    @Override
+    public ArrayList<? extends Task> getHistory() {
+        return null;
     }
 
     @Override
