@@ -60,7 +60,7 @@ public interface TaskManager {
 
     void deleteSubtask(int id);
 
-    HistoryManager getHistory();
+    //HistoryManager getHistory();
 
     @Override
     String toString();

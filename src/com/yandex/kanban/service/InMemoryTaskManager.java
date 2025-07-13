@@ -13,7 +13,8 @@ public class InMemoryTaskManager implements TaskManager {
     private HashMap<Integer, Task> hashMapTasks;
     private HashMap<Integer, Epic> hashMapEpics;
     private HashMap<Integer, Subtask> hashMapSubtasks;
-    private InMemoryHistoryManager history = Managers.getDefaultHistory();
+
+    //private InMemoryHistoryManager history = Managers.getDefaultHistory();
 
     public InMemoryTaskManager() {
         hashMapTasks = new HashMap<>();
@@ -43,10 +44,10 @@ public class InMemoryTaskManager implements TaskManager {
         return new ArrayList<>(hashMapSubtasks.values());
     }
 
-    @Override
-    public InMemoryHistoryManager getHistory() {
-        return history;
-    }
+//    @Override
+//    public InMemoryHistoryManager getHistory() {
+//        return history;
+//    }
 
     //Удаление всего списка задач
     @Override
@@ -79,25 +80,25 @@ public class InMemoryTaskManager implements TaskManager {
     @Override
     public Task getTask(Integer id){
         Task task = hashMapTasks.get(id);
-        if (hashMapTasks.containsKey(id)) {
-            history.add(task);
-        }
+//        if (hashMapTasks.containsKey(id)) {
+//            history.add(task);
+//        }
         return task;
     }
     @Override
     public Epic getEpic(Integer id){
         Epic epic = hashMapEpics.get(id);
-        if (hashMapEpics.containsKey(id)) {
-            history.add(epic);
-        }
+//        if (hashMapEpics.containsKey(id)) {
+//            history.add(epic);
+//        }
         return epic;
     }
     @Override
     public Subtask getSubtask(Integer id){
         Subtask subtask = hashMapSubtasks.get(id);
-        if (hashMapSubtasks.containsKey(id)) {
-            history.add(subtask);
-        }
+//        if (hashMapSubtasks.containsKey(id)) {
+//            history.add(subtask);
+//        }
         return subtask;
     }
 

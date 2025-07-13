@@ -9,6 +9,7 @@ public class Main {
 
         System.out.println("Поехали!");
         TaskManager manager = Managers.getDefault();
+        HistoryManager historyManager = Managers.getDefaultHistory();
 
         Task task1 = new Task("Task 1", "description 1");
         Epic epic = new Epic("Epic1", "Epic 1 Description");
@@ -17,10 +18,16 @@ public class Main {
         manager.addNewEpic(epic);
         manager.addNewSubtask(subtask1);
 
-        manager.getTask(1);
-        manager.getSubtask(3);
+
+        historyManager.add(manager.getTask(1));
+        historyManager.add(manager.getSubtask(3));
 
         printAllTasks(manager);
+
+        System.out.println("История:");
+        for (Task task : historyManager.getHistory()) {
+            System.out.println(task);
+        }
     }
     private static void printAllTasks(TaskManager manager) {
         System.out.println("Задачи:");
@@ -38,11 +45,6 @@ public class Main {
         System.out.println("Подзадачи:");
         for (Task subtask : manager.getAllSubtasks()) {
             System.out.println(subtask);
-        }
-
-        System.out.println("История:");
-        for (Task task : manager.getHistory().getHistory()) {
-            System.out.println(task);
         }
     }
 }
