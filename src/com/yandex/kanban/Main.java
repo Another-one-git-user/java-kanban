@@ -17,6 +17,9 @@ public class Main {
         manager.addNewEpic(epic);
         manager.addNewSubtask(subtask1);
 
+        manager.getTask(1);
+        manager.getSubtask(3);
+
         printAllTasks(manager);
     }
     private static void printAllTasks(TaskManager manager) {
@@ -38,7 +41,7 @@ public class Main {
         }
 
         System.out.println("История:");
-        for (Task task : manager.getHistory()) {
+        for (Task task : manager.getHistory().getHistory()) {
             System.out.println(task);
         }
     }

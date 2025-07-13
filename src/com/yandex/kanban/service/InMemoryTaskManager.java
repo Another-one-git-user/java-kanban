@@ -13,7 +13,7 @@ public class InMemoryTaskManager implements TaskManager {
     private HashMap<Integer, Task> hashMapTasks;
     private HashMap<Integer, Epic> hashMapEpics;
     private HashMap<Integer, Subtask> hashMapSubtasks;
-    private ArrayList<Task> lastTenViewedTasks = new ArrayList<>();
+    private InMemoryHistoryManager history = Managers.getDefaultHistory();
 
     public InMemoryTaskManager() {
         hashMapTasks = new HashMap<>();
@@ -41,6 +41,11 @@ public class InMemoryTaskManager implements TaskManager {
     @Override
     public ArrayList<Subtask> getAllSubtasks() {
         return new ArrayList<>(hashMapSubtasks.values());
+    }
+
+    @Override
+    public InMemoryHistoryManager getHistory() {
+        return history;
     }
 
     //Удаление всего списка задач
@@ -75,7 +80,7 @@ public class InMemoryTaskManager implements TaskManager {
     public Task getTask(Integer id){
         Task task = hashMapTasks.get(id);
         if (hashMapTasks.containsKey(id)) {
-            //addToLastTenViewedTasks(task);
+            history.add(task);
         }
         return task;
     }
@@ -83,7 +88,7 @@ public class InMemoryTaskManager implements TaskManager {
     public Epic getEpic(Integer id){
         Epic epic = hashMapEpics.get(id);
         if (hashMapEpics.containsKey(id)) {
-            //addToLastTenViewedTasks(epic);
+            history.add(epic);
         }
         return epic;
     }
@@ -91,7 +96,7 @@ public class InMemoryTaskManager implements TaskManager {
     public Subtask getSubtask(Integer id){
         Subtask subtask = hashMapSubtasks.get(id);
         if (hashMapSubtasks.containsKey(id)) {
-            //addToLastTenViewedTasks(subtask);
+            history.add(subtask);
         }
         return subtask;
     }
