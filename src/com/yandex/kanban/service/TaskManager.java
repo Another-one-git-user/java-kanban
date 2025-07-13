@@ -3,202 +3,63 @@ package com.yandex.kanban.service;
 import com.yandex.kanban.module.Epic;
 import com.yandex.kanban.module.Subtask;
 import com.yandex.kanban.module.Task;
-import com.yandex.kanban.module.TaskStatus;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
-public class TaskManager {
-    private static int taskId;
-    private HashMap<Integer, Task> hashMapTasks;
-    private HashMap<Integer, Epic> hashMapEpics;
-    private HashMap<Integer, Subtask> hashMapSubtasks;
-
-    public TaskManager() {
-        hashMapTasks = new HashMap<>();
-        hashMapEpics = new HashMap<>();
-        hashMapSubtasks = new HashMap<>();
-        taskId = 0;
-    }
-
+public interface TaskManager {
     //методы для id задач
-    public int generateNewTaskId() {
-        taskId ++;
-        return taskId;
-    }
+    int generateNewTaskId();
 
     //гетеры таблиц
-    public ArrayList<Task> getAllTasks() {
-        return new ArrayList<>(hashMapTasks.values());
-    }
-    public ArrayList<Epic> getAllEpics() {
-        return new ArrayList<>(hashMapEpics.values());
-    }
-    public ArrayList<Subtask> getAllSubtasks() {
-        return new ArrayList<>(hashMapSubtasks.values());
-    }
+    ArrayList<Task> getAllTasks();
+
+    ArrayList<Epic> getAllEpics();
+
+    ArrayList<Subtask> getAllSubtasks();
 
     //Удаление всего списка задач
-    public void deleteAllTasks() {
-        hashMapTasks.clear();
-    }
-    public void deleteAllEpics() { //нет эпиков, значит, нет подзадач
-        hashMapEpics.clear();
-        hashMapSubtasks.clear();
-    }
-    public void deleteAllSubtasks() {
-        hashMapSubtasks.clear();
-        for (Epic epic: hashMapEpics.values()) {
-            epic.clearSubtasks();
-            setEpicStatus(epic);
-        }
-    }
+    void deleteAllTasks();
+
+    void deleteAllEpics();
+
+    void deleteAllSubtasks();
 
     //Получение задачи по id
-    public Task getTaskById(Integer id){
-        return hashMapTasks.get(id);
-    }
-    public Epic getEpicById(Integer id){
-        return hashMapEpics.get(id);
-    }
-    public Subtask getSubtaskById(Integer id){
-        return hashMapSubtasks.get(id);
-    }
+    Task getTaskById(Integer id);
+
+    Epic getEpicById(Integer id);
+
+    Subtask getSubtaskById(Integer id);
 
     // Добавление новой задачи в менеджер
-    public void addNewTask(Task newTask){
-        int id = generateNewTaskId();
-        newTask.setId(id);
-        hashMapTasks.put(id, newTask);
-    }
-    public void addNewEpic(Epic newEpic){
-        int id = generateNewTaskId();
-        newEpic.setId(id);
-        hashMapEpics.put(id, newEpic);
-    }
-    public void addNewSubtask(Subtask newSubtask){
-        int id = generateNewTaskId();
-        int epicId = newSubtask.getEpicId();
-        newSubtask.setId(id);
-        addSubtaskToEpic(id, epicId);
-        hashMapSubtasks.put(id, newSubtask);
-        setEpicStatus(hashMapEpics.get(epicId));
-    }
+    void addNewTask(Task newTask);
 
-    //Добавляем подзадачу в Эпик
-    private void addSubtaskToEpic(int id, int epicId) {
-        Epic epic = hashMapEpics.get(epicId);
-        if (epic != null) { //Если эпика нет, то подзадача не добавляется никуда
-            if (!epic.getSubtasks().contains(id)) {
-                epic.addSubtask(id);
-            }
-        }
-    }
+    void addNewEpic(Epic newEpic);
+
+    void addNewSubtask(Subtask newSubtask);
 
     //Получить список всех подзадач Эпика
-    public ArrayList<Subtask> getEpicSubtasks(Epic epic) {
-        ArrayList<Integer> ids = epic.getSubtasks();
-        ArrayList<Subtask> copies = new ArrayList<>();
-        for (Integer id : ids) {
-            copies.add(new Subtask(hashMapSubtasks.get(id)));
-        }
-        return copies;
-    }
+    ArrayList<Subtask> getEpicSubtasks(Epic epic);
 
     //Метод вычисления статуса эпика
-    public void setEpicStatus(Epic epic) {
-        if (epic.getSubtasks().isEmpty()) {
-            epic.setTaskStatus(TaskStatus.NEW);
-        } else {
-            boolean isAllNew = true;
-            boolean isAllDone = true;
-            for (Subtask subtask : hashMapSubtasks.values()) {
-                if (subtask.getEpicId() == epic.getId()) {
-                    if (subtask.getTaskStatus() != TaskStatus.NEW) {
-                        isAllNew = false;
-                    }
-                    if (subtask.getTaskStatus() != TaskStatus.DONE) {
-                        isAllDone = false;
-                    }
-                    if (!isAllNew && !isAllDone) {
-                        break;
-                    }
-                }
-            }
-            if (isAllNew) {
-                epic.setTaskStatus(TaskStatus.NEW);
-            } else if (isAllDone) {
-                epic.setTaskStatus(TaskStatus.DONE);
-            } else {
-                epic.setTaskStatus(TaskStatus.IN_PROGRESS);
-            }
-        }
-    }
+    void setEpicStatus(Epic epic);
 
     /*
-    Обновление задачи
-    */
-    public void updateTask(Task updateTask) {
-        int id = updateTask.getId();
-        if (hashMapTasks.containsKey(id)) {
-            Task task = hashMapTasks.get(id);
-            task.setTaskTitle(updateTask.getTaskTitle());
-            task.setDescription(updateTask.getDescription());
-            task.setTaskStatus(updateTask.getTaskStatus());
-        }
-    }
-    public void updateEpic(Epic updateEpic) {
-        int id = updateEpic.getId();
-        if (hashMapEpics.containsKey(id)) {
-            Epic oldEpic = hashMapEpics.get(id);
-            oldEpic.setTaskTitle(updateEpic.getTaskTitle());
-            oldEpic.setDescription(updateEpic.getDescription());
-        }
-    }
-    public void updateSubtask(Subtask updateSubtask) {
-        int id = updateSubtask.getId();
-        if (hashMapSubtasks.containsKey(id)) {
-            Subtask subtask = hashMapSubtasks.get(id);
-            subtask.setTaskTitle(updateSubtask.getTaskTitle());
-            subtask.setDescription(updateSubtask.getDescription());
-            subtask.setTaskStatus(updateSubtask.getTaskStatus());
-            setEpicStatus(hashMapEpics.get(subtask.getEpicId()));
-        }
-    }
+        Обновление задачи
+        */
+    void updateTask(Task updateTask);
+
+    void updateEpic(Epic updateEpic);
+
+    void updateSubtask(Subtask updateSubtask);
 
     // Удаление задачи из списка
-    public void deleteTask(int id) {
-        if (getTaskById(id) != null) {
-            hashMapTasks.remove(id);
-        }
-    }
-    public void deleteEpic(int id) {
-        Epic epic = getEpicById(id);
-        if (epic != null) {
-            //Вместе с эпиком удаляются и его подзадачи
-            ArrayList<Integer> epicSubtasksIds = epic.getSubtasks();
-            for (Integer subId : epicSubtasksIds) {
-                hashMapSubtasks.remove(subId);
-            }
-            hashMapEpics.remove(id);
-        }
-    }
-    public void deleteSubtask(int id) {
-        Epic epic = hashMapEpics.get(getSubtaskById(id).getEpicId());
-        if (epic != null) {
-            epic.removeSubtask(id);
-            hashMapSubtasks.remove(id);
-            setEpicStatus(epic);
-        }
-    }
+    void deleteTask(int id);
+
+    void deleteEpic(int id);
+
+    void deleteSubtask(int id);
 
     @Override
-    public String toString() {
-        return "TaskManager{" +
-                "hashMapTasks=" + hashMapTasks +
-                ", hashMapEpics=" + hashMapEpics +
-                ", hashMapSubtasks=" + hashMapSubtasks +
-                '}';
-    }
-
+    String toString();
 }

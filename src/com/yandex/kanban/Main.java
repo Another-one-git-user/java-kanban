@@ -1,6 +1,6 @@
 package com.yandex.kanban;
 import com.yandex.kanban.module.*;
-import com.yandex.kanban.service.TaskManager;
+import com.yandex.kanban.service.InMemoryTaskManager;
 
 public class Main {
 
@@ -8,7 +8,7 @@ public class Main {
 
         System.out.println("Поехали!");
 
-        TaskManager taskManager = new TaskManager();
+        InMemoryTaskManager taskManager = new InMemoryTaskManager();
 
         Task task1 = new Task("Task 1", "description 1");
         Task task2 = new Task(TaskStatus.IN_PROGRESS,"Task 2 with status", "task is in forever progress");
