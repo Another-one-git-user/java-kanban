@@ -5,15 +5,24 @@ import com.yandex.kanban.service.HistoryManager;
 import com.yandex.kanban.service.Managers;
 import com.yandex.kanban.service.TaskManager;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class MainTest {
+
+    private TaskManager manager;
+
+    @BeforeEach
+    void beforeEach() {
+        manager = Managers.getDefault();
+    }
+
     @Test
     void shouldBeEqualSinceSameIdTasks() {
-        TaskManager manager = Managers.getDefault();
+
         Task task1 = new Task("title", "description");
         manager.addNewTask(task1);
         int task1Id = task1.getId();
@@ -23,7 +32,7 @@ class MainTest {
 
     @Test
     void shouldBeEqualSinceSameId() {
-        TaskManager manager = Managers.getDefault();
+
         Task task1 = new Task("title", "description");
         manager.addNewTask(task1);
         int task1Id = task1.getId();
@@ -36,7 +45,7 @@ class MainTest {
 
     @Test
     void shouldBeNotEqualsEvenThoSubtaskHasSameIdAsEpic() {
-        TaskManager manager = Managers.getDefault();
+
         //По сути, чтоб это проверить, нужно создать подзадачу равную эпику и добавить её в менеджер
         //Создаём epic и присваеваем ему id через manager
         Epic epic = new Epic("epic", "different description");
@@ -55,7 +64,7 @@ class MainTest {
 
     @Test
     void shouldBeNullEvenThoEpicHasSameIdAsSubtask() {
-        TaskManager manager = Managers.getDefault();
+
 
         Epic epic = new Epic("epic", "different description");
         manager.addNewEpic(epic);
@@ -73,7 +82,7 @@ class MainTest {
 
     @Test
     void shouldNotBeNullWhenNewManger() {
-        TaskManager manager = Managers.getDefault();
+
         TaskManager manager2 = Managers.getDefault();
 
         assertNotNull(manager);
@@ -82,7 +91,7 @@ class MainTest {
 
     @Test
     void shouldNotBeNullWhenNewTasks() {
-        TaskManager manager = Managers.getDefault();
+
 
         Task task = new Task("title", "description");
         Epic epic = new Epic("epic", "different description");
@@ -98,7 +107,7 @@ class MainTest {
 
     @Test
     void shouldReturnTitleAndDescriptionOfTaskInManager() {
-        TaskManager manager = Managers.getDefault();
+
 
         Task taskInManager = new Task("titleInManager", "descriptionInManager");
         Task taskNotInManager = new Task("titleNotInManager", "descriptionNotInManager", 1);
@@ -110,7 +119,7 @@ class MainTest {
 
     @Test
     void shouldFieldsBeTheEqualBeforeAndAfter() {
-        TaskManager manager = Managers.getDefault();
+
 
         Task taskBefore = new Task(TaskStatus.IN_PROGRESS,"titleInManager", "descriptionInManager");
         String titleBefore = taskBefore.getTaskTitle();
@@ -145,7 +154,7 @@ class MainTest {
 
     @Test
     void shouldSaveOldVersion() {
-        TaskManager manager = Managers.getDefault();
+
         HistoryManager historyManager = Managers.getDefaultHistory();
 
         Task task = new Task("title", "description");
