@@ -1,45 +1,45 @@
 package com.yandex.kanban;
 import com.yandex.kanban.module.*;
-import com.yandex.kanban.service.InMemoryTaskManager;
+import com.yandex.kanban.service.*;
+
 
 public class Main {
 
     public static void main(String[] args) {
 
         System.out.println("Поехали!");
-
-        InMemoryTaskManager taskManager = new InMemoryTaskManager();
+        TaskManager manager = Managers.getDefault();
 
         Task task1 = new Task("Task 1", "description 1");
-        Task task2 = new Task(TaskStatus.IN_PROGRESS,"Task 2 with status", "task is in forever progress");
-
-        taskManager.addNewTask(task1);
-        taskManager.addNewTask(task2);
-
         Epic epic = new Epic("Epic1", "Epic 1 Description");
-        taskManager.addNewEpic(epic);
-        Subtask subtask1 = new Subtask("Subtask 1", "none", 3);
-        taskManager.addNewSubtask(subtask1);
-        Subtask subtask2 = new Subtask(TaskStatus.DONE, "Subtask 2", "none again", 3);
-        taskManager.addNewSubtask(subtask2);
+        Subtask subtask1 = new Subtask("Subtask 1", "none", 2);
+        manager.addNewTask(task1);
+        manager.addNewEpic(epic);
+        manager.addNewSubtask(subtask1);
 
+        printAllTasks(manager);
+    }
+    private static void printAllTasks(TaskManager manager) {
+        System.out.println("Задачи:");
+        for (Task task : manager.getAllTasks()) {
+            System.out.println(task);
+        }
+        System.out.println("Эпики:");
+        for (Epic epic : manager.getAllEpics()) {
+            System.out.println(epic);
 
-        Epic epic2 = new Epic("Epic 2", "Epic 2 Description");
-        taskManager.addNewEpic(epic2);
-        Subtask subtask3 = new Subtask("Subtask 3 in epic2", "noen", 6);
-        taskManager.addNewSubtask(subtask3);
+            for (Task task : manager.getEpicSubtasks(epic)) {
+                System.out.println("--> " + task);
+            }
+        }
+        System.out.println("Подзадачи:");
+        for (Task subtask : manager.getAllSubtasks()) {
+            System.out.println(subtask);
+        }
 
-        System.out.println(taskManager.getAllTasks());
-        System.out.println(taskManager.getAllEpics());
-        System.out.println(taskManager.getAllSubtasks());
-
-        Subtask subtask4 = new Subtask(TaskStatus.DONE, "Subtask 4 in epic2", "noen", 4, 4);
-        taskManager.updateSubtask(subtask4);
-
-        taskManager.deleteEpic(5);
-        System.out.println(taskManager.getAllEpics());
-        System.out.println(taskManager.getAllSubtasks());
-        taskManager.deleteAllSubtasks();
-        System.out.println(taskManager.getAllEpics());
+        System.out.println("История:");
+        for (Task task : manager.getHistory()) {
+            System.out.println(task);
+        }
     }
 }
