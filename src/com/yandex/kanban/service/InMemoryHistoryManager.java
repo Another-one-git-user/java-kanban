@@ -12,7 +12,7 @@ public class InMemoryHistoryManager implements HistoryManager{
         if (lastTenViewedTasks.size() == 10) {
             lastTenViewedTasks.remove(0);
         }
-        lastTenViewedTasks.add(task);
+        lastTenViewedTasks.add(new Task(task));
     }
 
     @Override
