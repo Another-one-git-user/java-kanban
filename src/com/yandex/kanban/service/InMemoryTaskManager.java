@@ -235,8 +235,8 @@ public class InMemoryTaskManager implements TaskManager {
     }
 
     @Override
-    public ArrayList<? extends Task> getHistory() {
-        return null;
+    public ArrayList<Task> getHistory() {
+        return new ArrayList<Task>(lastTenViewedTasks);
     }
 
     @Override
