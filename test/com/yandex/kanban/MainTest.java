@@ -164,7 +164,6 @@ class MainTest {
         manager.getTask(1);
 
         Task oldTask = manager.getHistory().getHistory().get(0);
-        System.out.println(manager.getHistory().getHistory());
         assertEquals("title", oldTask.getTaskTitle());
         assertEquals("description", oldTask.getDescription());
     }
