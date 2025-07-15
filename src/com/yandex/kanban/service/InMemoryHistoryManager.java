@@ -2,21 +2,22 @@ package com.yandex.kanban.service;
 
 import com.yandex.kanban.module.Task;
 
-import java.util.ArrayList;
+import java.util.LinkedList;
 
 public class InMemoryHistoryManager implements HistoryManager{
-    private ArrayList<Task> lastTenViewedTasks = new ArrayList<>();
+    private LinkedList<Task> lastTenViewedTasks = new LinkedList<>();
+    private final static int MAX_SIZE = 10;
 
     @Override
     public void add(Task task) {
-        if (lastTenViewedTasks.size() == 10) {
-            lastTenViewedTasks.remove(0);
+        if (lastTenViewedTasks.size() == MAX_SIZE) {
+            lastTenViewedTasks.removeFirst();
         }
         lastTenViewedTasks.add(new Task(task));
     }
 
     @Override
-    public ArrayList<Task> getHistory() {
-        return new ArrayList<>(lastTenViewedTasks);
+    public LinkedList<Task> getHistory() {
+        return new LinkedList<>(lastTenViewedTasks);
     }
 }
