@@ -8,17 +8,22 @@ import com.yandex.kanban.module.TaskStatus;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import static com.yandex.kanban.service.Managers.getDefaultHistory;
+
 public class InMemoryTaskManager implements TaskManager {
     private static int taskId;
     private HashMap<Integer, Task> hashMapTasks;
     private HashMap<Integer, Epic> hashMapEpics;
     private HashMap<Integer, Subtask> hashMapSubtasks;
 
+    private HistoryManager historyManager;
+
 
     public InMemoryTaskManager() {
         hashMapTasks = new HashMap<>();
         hashMapEpics = new HashMap<>();
         hashMapSubtasks = new HashMap<>();
+        historyManager = getDefaultHistory();
         taskId = 0;
     }
 
@@ -68,15 +73,27 @@ public class InMemoryTaskManager implements TaskManager {
     //Получение задачи по id
     @Override
     public Task getTask(Integer id){
-        return hashMapTasks.get(id);
+        Task task = hashMapTasks.get(id);
+        if (hashMapTasks.containsKey(id)) {
+            historyManager.add(task);
+        }
+        return task;
     }
     @Override
     public Epic getEpic(Integer id){
-        return hashMapEpics.get(id);
+        Epic epic = hashMapEpics.get(id);
+        if (hashMapEpics.containsKey(id)) {
+            historyManager.add(epic);
+        }
+        return epic;
     }
     @Override
     public Subtask getSubtask(Integer id){
-        return hashMapSubtasks.get(id);
+        Subtask subtask = hashMapSubtasks.get(id);
+        if (hashMapSubtasks.containsKey(id)) {
+            historyManager.add(subtask);
+        }
+        return subtask;
     }
 
     // Добавление новой задачи в менеджер
@@ -215,6 +232,11 @@ public class InMemoryTaskManager implements TaskManager {
             hashMapSubtasks.remove(id);
             setEpicStatus(epic);
         }
+    }
+
+    @Override
+    public HistoryManager getHistory() {
+        return historyManager;
     }
 
     @Override
