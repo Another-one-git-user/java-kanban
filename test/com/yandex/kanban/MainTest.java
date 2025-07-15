@@ -155,18 +155,16 @@ class MainTest {
     @Test
     void shouldSaveOldVersion() {
 
-        HistoryManager historyManager = Managers.getDefaultHistory();
-
         Task task = new Task("title", "description");
         manager.addNewTask(task);
-        historyManager.add(manager.getTask(1));
+        manager.getTask(1);
 
         Task updateTask = new Task("new title", "new description", 1);
         manager.updateTask(updateTask);
-        historyManager.add(manager.getTask(1));
+        manager.getTask(1);
 
-        Task oldTask = historyManager.getHistory().get(0);
-        System.out.println(historyManager.getHistory());
+        Task oldTask = manager.getHistory().getHistory().get(0);
+        System.out.println(manager.getHistory().getHistory());
         assertEquals("title", oldTask.getTaskTitle());
         assertEquals("description", oldTask.getDescription());
     }
