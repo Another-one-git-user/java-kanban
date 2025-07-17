@@ -62,5 +62,4 @@ public interface TaskManager {
 
     HistoryManager getHistory();
 
-    String toString();
 }
