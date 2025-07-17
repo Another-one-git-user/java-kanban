@@ -7,6 +7,7 @@ import com.yandex.kanban.module.TaskStatus;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedList;
 
 import static com.yandex.kanban.service.Managers.getDefaultHistory;
 
@@ -235,8 +236,8 @@ public class InMemoryTaskManager implements TaskManager {
     }
 
     @Override
-    public HistoryManager getHistory() {
-        return historyManager;
+    public LinkedList<Task> getHistory() {
+        return historyManager.getHistory();
     }
 
     @Override

@@ -25,7 +25,7 @@ public class Main {
         printAllTasks(manager);
 
         System.out.println("История:");
-        for (Task task : manager.getHistory().getHistory()) {
+        for (Task task : manager.getHistory()) {
             System.out.println(task);
         }
     }

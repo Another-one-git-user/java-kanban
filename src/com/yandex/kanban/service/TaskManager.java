@@ -5,6 +5,7 @@ import com.yandex.kanban.module.Subtask;
 import com.yandex.kanban.module.Task;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 
 public interface TaskManager {
     //методы для id задач
@@ -60,6 +61,6 @@ public interface TaskManager {
 
     void deleteSubtask(int id);
 
-    HistoryManager getHistory();
+    LinkedList<Task> getHistory();
 
 }
